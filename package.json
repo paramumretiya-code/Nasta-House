@@ -1,0 +1,23 @@
+{
+  "name": "nasto-house",
+  "version": "1.0.0",
+  "description": "Nasto House - Real-time Restaurant Ordering System",
+  "private": true,
+  "workspaces": [
+    "server",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -p \"[{name}]\" -n \"SERVER,CUSTOMER,MANAGER\" -c \"blue,green,magenta\" \"npm run dev -w server\" \"npm run dev -w apps/customer\" \"npm run dev -w apps/manager\"",
+    "dev:server": "npm run dev -w server",
+    "dev:customer": "npm run dev -w apps/customer",
+    "dev:manager": "npm run dev -w apps/manager",
+    "build": "npm run build -w server && npm run build -w apps/customer && npm run build -w apps/manager",
+    "android:sync": "cd apps/customer && npx cap sync android && cd ../manager && npx cap sync android",
+    "test": "npm run test -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
+
